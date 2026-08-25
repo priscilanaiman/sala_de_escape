@@ -28,4 +28,33 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    //controller que vaya a la vista de tutorial. otro a ingresar nombre y otro a la story
+
+    public IActionResult Tutorial()
+    {
+        return View();
+    }
+
+    public IActionResult IngresarNombre()
+    {
+        return View();
+    }
+
+    public IActionResult Story()
+    {
+        return View();
+    }
+    //controler ComenzarSalas que guarde en la session el nombre del jugador, la sala actual y el id de la partida
+    public IActionResult ComenzarSalas(string nombre)
+    {
+        HttpContext.Session.SetString("NombreJugador", nombre);
+        //generar un id en la base de datos para la partida y guardarlo en la session
+        BD bd = new BD();
+        int idPartida = bd.CrearPartida(nombre);
+        HttpContext.Session.SetString("IdPartida", idPartida.ToString());
+        HttpContext.Session.SetString("SalaActual", "1");
+        return RedirectToAction("Sala", new { sala = sala });
+    }
+
 }
+

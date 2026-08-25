@@ -1,0 +1,21 @@
+en esta view se debe ingresar el nombre del usuario y que con un url.action te lleve al controler q sea ingresar a la sala
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Nombre - Sala de Escape</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ingresa tu Nombre</h1>
+        <form action="@Url.Action("ComenzarSalas", "Game")" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <button type="submit" class="button">Ingresar a la Sala</button>
+        </form>
+    </div>
+</body>
+</html>

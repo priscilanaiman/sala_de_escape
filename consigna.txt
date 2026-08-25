@@ -1,0 +1,52 @@
+ANTES DE EMPEZAR
+Primero tenés la Home con el nombre del juego, una imagen representativa y el botón “Comenzar”. 
+Desde allí se accede a la sección de tutorial/historia y a la de integrantes del grupo. Antes 
+de entrar a la primera sala, se muestra una pantalla de identificación donde el jugador ingresa su nombre. 
+Tras confirmar el nombre, el flujo dirige al jugador a la primera habitación.
+
+SESSIOM Y BD
+En Session solo se guarda la sala en la que está el jugador actualmente (SalaActual), el id de 
+la partida activa (PartidaId) y el nombre del participante. Toda la información de progreso, como 
+las respuestas ingresadas, la lista de salas resueltas y los intentos, se persiste en la base de datos.
+ La base de datos también almacena las entidades de Partidas y de Respuestas por sala para reconstruir el 
+ estado del juego. La validación de acceso a una sala se realiza siempre contra esos datos almacenados en 
+ la base de datos.
+
+ VALIDAR SALA RESUELTA
+ using (var cn = new SqlConnection(_cs))
+{
+    var sql = @"SELECT TOP 1 Resuelta
+                FROM SalaEstado
+                WHERE PartidaId = @partidaId AND SalaId = @salaId";
+    var esResuelta = cn.QueryFirstOrDefault<bool>(sql,
+                       new { partidaId = idPartida, salaId = idSala });
+    return esResuelta;
+}
+
+CONTROLLER
+GET / Habitacion/{id} – lee la partida y la sala actual desde *Session* (solo los ids) y, usando Dapper, 
+consulta la base para confirmar que la sala está disponible y cargar los datos que la vista necesita
+(descripción, objetos, pistas, etc.).
+
+public IActionResult Habitacion(int id)
+{
+    var partidaId = HttpContext.Session.GetInt32("PartidaId");
+    if (partidaId == null) return RedirectToAction("Index", "Home");
+
+    var sala = _bd.ObtenerSala(partidaId.Value, id);   // método Dapper en BD.cs
+    if (sala == null) return NotFound();
+
+    ViewBag.Sala = sala;
+    return View();
+}
+
+POST / Habitacion/{id} – recibe la respuesta del jugador, guarda el intento en la tabla correspondiente 
+y, si la validación es correcta, actualiza el registro de la sala a “resuelta”. Luego decide a qué sala dirigir al
+jugador (siguiente id o pantalla de fin).
+
+En la acción POST recibirías, por ejemplo, un modelo RespuestaDto con el intento del jugador, lo guardarías con connection.Execute,
+
+una accion para retomar el juego.
+
+POST / Habitacion/Salir – limpia la *Session* (salida de la partida) y redirige al inicio.
+
