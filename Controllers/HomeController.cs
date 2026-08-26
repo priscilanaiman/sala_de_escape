@@ -47,14 +47,29 @@ public class HomeController : Controller
     //controler ComenzarSalas que guarde en la session el nombre del jugador, la sala actual y el id de la partida
     public IActionResult ComenzarSalas(string nombre)
     {
+        BD bd = new BD();
         HttpContext.Session.SetString("NombreJugador", nombre);
         //generar un id en la base de datos para la partida y guardarlo en la session
-        BD bd = new BD();
         int idPartida = bd.CrearPartida(nombre);
         HttpContext.Session.SetString("IdPartida", idPartida.ToString());
         HttpContext.Session.SetString("SalaActual", "1");
-        return RedirectToAction("Sala", new { sala = sala });
+        return RedirectToAction("Sala", new { sala = 1 });
     }
-
+    //crear accion Sala que reciba un parametro sala y lo guarde en la session
+    public IActionResult Sala(int sala)
+    {
+        HttpContext.Session.SetString("SalaActual", sala.ToString());
+        return View("sala" + sala);
+    }
+    //FinalizarPartida llevando a una view de final
+    public IActionResult FinalizarPartida()
+    {
+        //obtener el id de la partida de la session
+        int idPartida = int.Parse(HttpContext.Session.GetString("IdPartida"));
+        //actualizar la partida en la base de datos con la fecha de fin y el estado
+        BD bd = new BD();
+        bd.FinalizarPartida(idPartida);
+        return View("Final");
+    }
 }
 

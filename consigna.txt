@@ -50,3 +50,5 @@ una accion para retomar el juego.
 
 POST / Habitacion/Salir – limpia la *Session* (salida de la partida) y redirige al inicio.
 
+PROXIMA CLASE:
+CrearPartida EN BD no agrega ningun ode los 2 id. entonces tenemos que hacer que el de la persona lelgue directo desde el parametro y para ello, en el controller amtes de llamar a esa funcion de bd hay uqe mmalar a otra que devuelka el id ya teninedo le nombre.
