@@ -48,9 +48,9 @@ public class HomeController : Controller
     public IActionResult ComenzarSalas(string nombre)
     {
         BD bd = new BD();
+        bd.CrearParticipante(nombre);
         HttpContext.Session.SetString("NombreJugador", nombre);
-        //generar un id en la base de datos para la partida y guardarlo en la session
-        int idPartida = bd.CrearPartida(nombre);
+        int idPartida = bd.CrearPartida(ObtenerIdParticipante(nombre));
         HttpContext.Session.SetString("IdPartida", idPartida.ToString());
         HttpContext.Session.SetString("SalaActual", "1");
         return RedirectToAction("Sala", new { sala = 1 });
