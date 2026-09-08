@@ -1,6 +1,10 @@
-<body>
-{
-    <h1>Sala 3</h1>
-    <a href="@Url.Action("Sala", "Home", new { sala = 4 })">Ir a Sala 4</a>
-}
-</body>
+    <h1>SALA 3</h1>
+    <p>Entro en una habitación dominada por una pared de monitores que parpadean de manera irregular. Las pantallas muestran patrones extraños mientras un paciente murmura algo incomprensible desde algún lugar fuera de mi vista. En el centro de la sala, una consola permanece activa y parece controlar el acceso a la siguiente zona. La puerta está bloqueada y, entre la interferencia de las pantallas, encuentro una secuencia que parece ser la única forma de restablecer el circuito. </p>
+    <p><strong>Pista:</strong> "La luz que apagas es la que abre el camino"</p>
+    <p> 10010110 </p>
+    <p>Ingresa el código correcto para avanzar a la siguiente sala:</p>
+    <form method="post" action="@Url.Action("Sala", "Home", new { sala = 4 })" onsubmit="return verificarCodigoSala3();">
+        <input type="text" name="codigo" id="codigo" placeholder="Ingresa el código aquí" required />
+        <button type="submit">Pasar a la siguiente sala</button>
+    </form>
+    <p id="mensajeError"></p>

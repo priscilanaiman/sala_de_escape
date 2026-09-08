@@ -1,4 +1,33 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+function verificarCodigoSala1() 
+{
+    let codigoIngresado = document.getElementById("codigo").value;
+    let codigoCorrecto = "372";
+    let mensajeError = document.getElementById("mensajeError");
 
-// Write your JavaScript code.
+    if (codigoIngresado === codigoCorrecto)
+    {
+        return true; // Permitir el envío del formulario
+    }
+    else
+    {
+        mensajeError.innerHTML = "Código incorrecto. Inténtalo de nuevo.";
+        return false; // Bloquear el envío del formulario
+    }
+}
+function verificarCodigoSala3()
+{
+    let codigoIngresado = document.getElementById("codigo").value;
+    let codigoCorrecto = "01101001";
+    let mensajeError = document.getElementById("mensajeError");
+
+    if (codigoIngresado === codigoCorrecto)
+    {
+        return true; // Permitir el envío del formulario
+    }
+    else
+    {
+        mensajeError.innerHTML = "Código incorrecto. Inténtalo de nuevo.";
+        return false; // Bloquear el envío del formulario
+    }
+}

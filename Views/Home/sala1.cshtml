@@ -1,7 +1,13 @@
-//crear vista para la sala 1 con un a con url.action que te lleve a un controller que se llame sala y le pase el parametro sala=2
-<body>
-{
-    <h1>Sala 1</h1>
-    <a href="@Url.Action("Sala", "Home", new { sala = 2 })">Ir a Sala 2</a>
-}
-</body>
+<!-- crear vista para la sala 1 con un a con url.action que te lleve a un controller que se llame sala y le pase el parametro sala=2 -->
+    <!-- SALA1 -->
+    <h1>Celda 402</h1>
+    <p>Frente a mí, una camilla permanece equipada con gruesas correas de cuero, todavía tensadas, mientras encuentro restos de sedantes esparcidos a mi alrededor. La puerta está cerrada desde el exterior y no encuentro ningún mecanismo evidente para abrirla. Si quiero salir, tendré que descubrir qué ocurrió aquí y encontrar entre los objetos abandonados la primera pista hacia mi libertad. </p>
+    <p><strong>Pista:</strong> "Las manchas de humedad no son aleatorias, siguen el ritmo de la vida que se resta"</p>
+    <p> 400 398 395 390 383 </p>
+    <p>Ingresa el código correcto para avanzar a la siguiente sala:</p>
+    <form method="post" action="@Url.Action("Sala", "Home", new { sala = 2 })" onsubmit="return verificarCodigoSala1();">
+        <input type="text" name="codigo" id="codigo" placeholder="Ingresa el código aquí" required />
+        <button type="submit">Pasar a la siguiente sala</button>
+    </form>
+    <p id="mensajeError"></p>
+

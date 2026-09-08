@@ -50,7 +50,7 @@ public class HomeController : Controller
         BD bd = new BD();
         bd.CrearParticipante(nombre);
         HttpContext.Session.SetString("NombreJugador", nombre);
-        int idPartida = bd.CrearPartida(ObtenerIdParticipante(nombre));
+        int idPartida = bd.CrearPartida(bd.ObtenerIdParticipante(nombre));
         HttpContext.Session.SetString("IdPartida", idPartida.ToString());
         HttpContext.Session.SetString("SalaActual", "1");
         return RedirectToAction("Sala", new { sala = 1 });
