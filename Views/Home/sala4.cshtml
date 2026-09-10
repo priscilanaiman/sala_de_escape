@@ -1,3 +1,21 @@
+<h1>Laboratorio de Neuro-Ciencia</h1>
+    <p>Al entrar, apenas puedo distinguir las formas del laboratorio en la oscuridad. Una consola de voltaje permanece apagada mientras varios cables expuestos cuelgan de las paredes. Necesito restablecer la electricidad para continuar, pero no sé qué circuitos siguen funcionando. Cada conexión que realizo podría devolver la energía... o activar algo que debería permanecer apagado.</p>
+    <p><strong>Pista:</strong> "Ni más, ni menos, el equilibrio es la potencia"</p>
+    <p>La consola muestra varios interruptores con valores fijos. Solo si la suma total coincide exactamente con el voltaje objetivo la energía volverá a fluir.</p>
 
-    <h1>Sala 4</h1>
-    <a href="@Url.Action("Sala", "Home", new { sala = 5 })">Ir a Sala 5</a>
+    <div class="mb-3">
+        <p>Objetivo: <strong id="objetivoSala4">12</strong></p>
+        <div class="d-flex flex-wrap gap-2">
+            <button type="button" onclick="sumarValor(2)">Interruptor A (+2)</button>
+            <button type="button" onclick="sumarValor(3)">Interruptor B (+3)</button>
+            <button type="button" onclick="sumarValor(4)">Interruptor C (+4)</button>
+            <button type="button" onclick="sumarValor(6)">Interruptor D (+6)</button>
+            <button type="button" onclick="sumarValor(7)">Interruptor E (+7)</button>
+        </div>
+        <p id="totalSala4" >Total actual: 0 </p>
+    </div>
+
+    <form method="post" action="@Url.Action("Sala", "Home", new { sala = 5 })" onsubmit="return verificarCodigoSala4();">
+        <button type="submit">Pasar a la siguiente sala</button>
+    </form>
+    <p id="mensajeError"></p>

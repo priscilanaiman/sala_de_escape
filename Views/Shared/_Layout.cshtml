@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,38 +10,34 @@
     <link rel="stylesheet" href="~/sala_de_escape.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">sala_de_escape</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="app-header">
+        <div class="container">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.5rem 0">
+                <a class="app-title" asp-area="" asp-controller="Home" asp-action="Index">Sala de Escape</a>
+                <nav>
+                    <a class="muted" asp-area="" asp-controller="Home" asp-action="Index" style="margin-right:.75rem">Inicio</a>
+                    <a class="muted" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
+                </nav>
             </div>
-        </nav>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="site-wrapper" style="display:flex;align-items:center;justify-content:center;padding:2rem 0;">
+        <div class="container">
+            <main role="main">
+                <div class="card" style="max-width:var(--max-width);margin:0 auto;padding:1.25rem;background:linear-gradient(180deg,rgba(14,33,51,0.6),rgba(6,12,20,0.6));">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - sala_de_escape - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="app-footer">
+        <div class="container text-center">
+            &copy; 2026 - Sala de Escape
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

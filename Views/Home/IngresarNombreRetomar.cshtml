@@ -1,16 +1,16 @@
 @{
-        ViewData["Title"] = "Ingresar Nombre";
+        ViewData["Title"] = "Retomar Partida";
 }
 
-<div class="container" style="min-height:70vh;display:flex;align-items:center;justify-content:center;">
-    <div class="card" style="max-width:420px;width:100%;background:linear-gradient(180deg,var(--surface),rgba(14,33,51,0.6));padding:1.25rem;">
+<div class="container" style="display:flex;align-items:center;justify-content:center">
+    <div style="width:100%;max-width:420px">
         <h1 class="text-center">Ingresa tu Nombre</h1>
 
         @if (TempData["Error"] != null) {
             <div class="alert error">@TempData["Error"]</div>
         }
 
-        <form action="@Url.Action("ComenzarSalas", "Home")" method="post">
+        <form action="@Url.Action("Retomar", "Home")" method="post">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required />
             <button type="submit" class="btn" style="width:100%;margin-top:.75rem">Ingresar a la Sala</button>

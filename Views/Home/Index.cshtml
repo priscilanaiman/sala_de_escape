@@ -1,21 +1,15 @@
-﻿<!-- pantalla de inicio de sala de escape con un boton para poder comenzar y otro para ver el tutorial y otro para ver la historia del juego. los botones deben ser un "a" con un url acttion para ir a un controller -->
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
 
-<!DOCTYPE html>
-<html lang="es">   
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Inicio - Sala de Escape</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Bienvenido a la Sala de Escape</h1>
-        <p>Prepárate para una experiencia emocionante. ¿Estás listo para comenzar?</p>
-        <div class="buttons">
-            <a href="@Url.Action("IngresarNombre", "Home")" class="button">Comenzar</a>
-            <a href="@Url.Action("Tutorial", "Home")" class="button">Ver Tutorial</a>
-            <a href="@Url.Action("Story", "Home")" class="button">Ver Historia</a>
-        </div>
-    </div>
-</body>
+<div class="text-center">
+  <h1>Bienvenido a la Sala de Escape</h1>
+  <p>Prepárate para una experiencia emocionante. ¿Estás listo para comenzar?</p>
+
+  <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:1rem">
+    <a href="@Url.Action("IngresarNombre", "Home")" class="btn">Comenzar</a>
+    <a href="@Url.Action("Tutorial", "Home")" class="btn secondary">Ver Tutorial</a>
+    <a href="@Url.Action("Story", "Home")" class="btn secondary">Ver Historia</a>
+    <a href="@Url.Action("RetomarPartida", "Home")" class="btn secondary">Retomar partida</a>
+  </div>
+</div>

@@ -1,3 +1,21 @@
+<h1>Sala de Medicación</h1>
+    <p>Entro en una sala llena de estantes, frascos sin etiquetar y cajas abiertas. Varias jeringas usadas permanecen sobre una bandeja metálica. No sé qué medicamentos contienen los recipientes ni cuáles fueron utilizados con los pacientes. Necesito encontrar entre ellos la información que me permita continuar, pero distinguir una pista de una sustancia peligrosa puede ser mucho más difícil de lo que parece. </p>
+    <p><strong>Pista:</strong> "Rojo y azul no siempre dan violeta aquí"</p>
 
-    <h1>Sala 6</h1>
-    <a href="@Url.Action("FinalizarPartida", "Home")">Finalizar Partida</a>
+    <div class="mb-3">
+        <p>Secuencia actual: <strong id="secuenciaSala6">-</strong></p>
+        <div class="d-flex flex-wrap gap-2">
+            <button type="button" style="color: red;" onclick="agregarColor('R')">Rojo (R)</button>
+            <button type="button" style="color: green;" onclick="agregarColor('G')">Verde (G)</button>
+            <button type="button" style="color: blue;" onclick="agregarColor('B')">Azul (B)</button>
+            <button type="button" style="color: yellow;" onclick="agregarColor('Y')">Amarillo (Y)</button>
+            <button type="button" style="color: purple;" onclick="agregarColor('P')">Púrpura (P)</button>
+        </div>
+    </div>
+
+    <form method="post" action="@Url.Action("FinalizarPartida", "Home")" onsubmit="return verificarCodigoSala6();">
+        <input type="hidden" name="codigo" id="codigo" value="" />
+        <button type="submit">Preparar antídoto</button>
+    </form>
+    <p id="mensajeError"></p>
+

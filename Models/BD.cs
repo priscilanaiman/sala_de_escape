@@ -11,7 +11,7 @@ public class BD
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             idPartida = connection.QueryFirstOrDefault<int>("SELECT TOP 1 Id FROM Partida ORDER BY Id DESC");
-            string query = "INSERT INTO Partida (ParticipanteId, FechaInicio, Estado) VALUES (@ParticipanteId, GETDATE(), 1)";
+            string query = "INSERT INTO Partida (ParticipanteId, FechaInicio, Estado, SalaActual) VALUES (@ParticipanteId, GETDATE(), 1, 1)";
             connection.Execute(query, new { ParticipanteId = idParticipante,});
 
         }
@@ -44,6 +44,34 @@ public class BD
         {
             string query = "INSERT INTO Participante (Nombre, FechaCreacion) VALUES (@Nombre, GETDATE())";
             connection.Execute(query, new { Nombre = nombre });
+        }
+    }
+    public int ObtenerIdPartida(string nombre)
+    {
+        int idPartida;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "SELECT Id FROM Partida WHERE ParticipanteId = (SELECT Id FROM Participante WHERE Nombre = @Nombre)";
+            idPartida = connection.QueryFirstOrDefault<int>(query, new { Nombre = nombre });
+        }
+        return idPartida;
+    }
+    public int ObtenerSalaActual(int idPartida)
+    {
+        int salaActual;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "SELECT SalaActual FROM Partida WHERE Id = @Id";
+            salaActual = connection.QueryFirstOrDefault<int>(query, new { Id = idPartida });
+        }
+        return salaActual;
+    }
+    public void actualizarSalaActual(int idPartida, int salaActual)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "UPDATE Partida SET SalaActual = @SalaActual WHERE Id = @Id";
+            connection.Execute(query, new { SalaActual = salaActual, Id = idPartida });
         }
     }
 }

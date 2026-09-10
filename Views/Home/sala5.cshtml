@@ -1,3 +1,13 @@
 
-    <h1>Sala 5</h1>
-    <a href="@Url.Action("Sala", "Home", new { sala = 6 })">Ir a Sala 6</a>
+    <h1>Cuarto de Calderas</h1>
+    <p>El calor me golpea apenas entro. Las tuberías vibran constantemente y un ruido ensordecedor de vapor llena la habitación. Frente a mí hay varias válvulas conectadas a un sistema que parece estar bajo una presión peligrosa. Necesito controlar la caldera para poder avanzar, pero cualquier error podría provocar una sobrepresión. Aquí no tengo demasiado tiempo para equivocarme.  </p>
+    <p><strong>Pista:</strong> "“Sube cuando el calor aumenta,
+ baja cuando el calor disminuye.
+ Si subo demasiado, todo puede salir mal.
+ ¿Qué soy?”"</p>
+    <p>Ingresa el código correcto para avanzar a la siguiente sala:</p>
+    <form method="post" action="@Url.Action("Sala", "Home", new { sala = 6 })" onsubmit="return verificarCodigoSala5();">
+        <input type="text" name="codigo" id="codigo" placeholder="Ingresa el código aquí" required />
+        <button type="submit">Pasar a la siguiente sala</button>
+    </form>
+    <p id="mensajeError"></p>

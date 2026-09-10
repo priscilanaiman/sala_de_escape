@@ -1,3 +1,13 @@
 
-    <h1>Sala 2</h1>
-    <a href="@Url.Action("Sala", "Home", new { sala = 3 })">Ir a Sala 3</a>
+    <h1>Puesto de Control</h1>
+    <p>El primer obstáculo aparece frente a mí como una barrera entre mi celda y la libertad. Tras un cristal reforzado puedo ver las llaves que necesito, pero una cerradura electrónica impide que pueda alcanzarlas. Reviso el puesto de control y encuentro expedientes desparramados sobre una mesa. Entre ellos parece esconderse la combinación necesaria para abrir el cristal.  </p>
+    <p><strong>Pista:</strong> "Entre la suma de las fechas se esconde el tiempo que separa la libertad"</p>
+    <a href="@Url.Action("Expediente", "Home", new { numeroExpediente = 1 })">Expediente 1</a>
+    <a href="@Url.Action("Expediente", "Home", new { numeroExpediente = 2 })">Expediente 2</a>
+    <a href="@Url.Action("Expediente", "Home", new { numeroExpediente = 3 })">Expediente 3</a>
+    <p>Ingresa el código correcto para avanzar a la siguiente sala:</p>
+    <form method="post" action="@Url.Action("Sala", "Home", new { sala = 3 })" onsubmit="return verificarCodigoSala2();">
+        <input type="text" name="codigo" id="codigo" placeholder="Ingresa el código aquí" required />
+        <button type="submit">Pasar a la siguiente sala</button>
+    </form>
+    <p id="mensajeError"></p>

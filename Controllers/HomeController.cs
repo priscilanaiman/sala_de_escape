@@ -58,8 +58,12 @@ public class HomeController : Controller
     //crear accion Sala que reciba un parametro sala y lo guarde en la session
     public IActionResult Sala(int sala)
     {
+        BD bd = new BD();
         HttpContext.Session.SetString("SalaActual", sala.ToString());
+        int idPartida = int.Parse(HttpContext.Session.GetString("IdPartida"));
+        int salaActual = bd.ObtenerSalaActual(idPartida);
         return View("sala" + sala);
+        bd.actualizarSalaActual(idPartida, sala);
     }
     //FinalizarPartida llevando a una view de final
     public IActionResult FinalizarPartida()
@@ -70,6 +74,36 @@ public class HomeController : Controller
         BD bd = new BD();
         bd.FinalizarPartida(idPartida);
         return View("Final");
+    }
+    public IActionResult Expediente(int numeroExpediente)
+    {
+        Console.WriteLine("Número de expediente: " + numeroExpediente);
+        return View("Expediente" + numeroExpediente);
+    }
+    public IActionResult RetomarPartida()
+    {
+        //ingresar nombre y en base a eso buscar la partida en la base de datos y cargar la sala actual
+        return View("IngresarNombreRetomar");
+    }
+    public IActionResult Retomar(string nombre)
+    {
+        BD bd = new BD();
+        int idPartida = bd.ObtenerIdPartida(nombre);
+        if (idPartida == -1)
+        {
+            // si no existe la partida, volver a la vista de ingresar nombre mostrando un mensaje
+            TempData["Error"] = "No se encontró una partida para el nombre ingresado.";
+            return View("Index");
+        }
+        else
+        {
+            //si existe la partida, cargar la sala actual y redirigir a la sala correspondiente
+            HttpContext.Session.SetString("NombreJugador", nombre);
+            HttpContext.Session.SetString("IdPartida", idPartida.ToString());
+            int salaActual = bd.ObtenerSalaActual(idPartida);
+            HttpContext.Session.SetString("SalaActual", salaActual.ToString());
+            return RedirectToAction("Sala", new { sala = salaActual });
+        }
     }
 }
 
