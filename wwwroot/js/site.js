@@ -70,26 +70,28 @@ function verificarCodigoSala4() {
     }
 }
 //crear agregar color a la secuencia y verificar el codigo
-let secuencia = "";
-
+//let secuencia = "";
 function agregarColor(color) 
 {
-    secuencia += color;
-    document.getElementById("secuenciaSala6").innerText = secuencia;
+    
+    //secuencia += color;
+    document.getElementById("secuenciaSala6").innerText += color;
 }
 
 function verificarCodigoSala6() 
 {
+    let secuencia = document.getElementById("secuenciaSala6").innerText;
     const codigoCorrecto = "RGPY"; // Cambia esto según la secuencia correcta
     if (secuencia === codigoCorrecto) {
         return true; // Permite enviar el formulario
     } else {
         document.getElementById("mensajeError").innerText = "La secuencia es incorrecta. Intenta de nuevo.";
-        secuencia = ""; // Reinicia la secuencia
-        document.getElementById("secuenciaSala6").innerText = "-"; // Reinicia la visualización de la secuencia
+        //secuencia = ""; // Reinicia la secuencia
+        document.getElementById("secuenciaSala6").innerText = ""; // Reinicia la visualización de la secuencia
         return false; // Evita enviar el formulario
     }
 }
+
 function verificarCodigoSala2() {
     let codigoIngresado = document.getElementById("codigo").value;
     let codigoCorrecto = "44246056";
