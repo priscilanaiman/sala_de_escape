@@ -61,9 +61,8 @@ public class HomeController : Controller
         BD bd = new BD();
         HttpContext.Session.SetString("SalaActual", sala.ToString());
         int idPartida = int.Parse(HttpContext.Session.GetString("IdPartida"));
-        int salaActual = bd.ObtenerSalaActual(idPartida);
-        return View("sala" + sala);
         bd.actualizarSalaActual(idPartida, sala);
+        return View("sala" + sala);
     }
     //FinalizarPartida llevando a una view de final
     public IActionResult FinalizarPartida()
@@ -88,11 +87,10 @@ public class HomeController : Controller
     public IActionResult Retomar(string nombre)
     {
         BD bd = new BD();
-        int idPartida = bd.ObtenerIdPartida(nombre);
-        if (idPartida == -1)
+        int idPartida = bd.ObtenerIdUltimaPartida(nombre);
+        if (idPartida == 0)
         {
-            // si no existe la partida, volver a la vista de ingresar nombre mostrando un mensaje
-            TempData["Error"] = "No se encontró una partida para el nombre ingresado.";
+            ViewBag.Mensaje = "No se encontró ninguna partida para el jugador " + nombre;
             return View("Index");
         }
         else

@@ -46,12 +46,13 @@ public class BD
             connection.Execute(query, new { Nombre = nombre });
         }
     }
-    public int ObtenerIdPartida(string nombre)
+
+    public int ObtenerIdUltimaPartida(string nombre)
     {
         int idPartida;
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "SELECT Id FROM Partida WHERE ParticipanteId = (SELECT Id FROM Participante WHERE Nombre = @Nombre)";
+            string query = "SELECT TOP 1 Partida.Id FROM Partida INNER JOIN Participante ON Partida.ParticipanteId = Participante.Id WHERE Participante.Nombre = @Nombre AND Partida.Estado = 1 ORDER BY FechaInicio DESC";
             idPartida = connection.QueryFirstOrDefault<int>(query, new { Nombre = nombre });
         }
         return idPartida;
